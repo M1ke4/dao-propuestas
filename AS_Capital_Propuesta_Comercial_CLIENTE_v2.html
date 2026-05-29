@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Comercial — AS Capital | DAO Consulting & Learning Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0d0d0d;
+    --blanco: #f5f2ee;
+    --amarillo: #e8b84b;
+    --amarillo-suave: #faf3de;
+    --verde: #1e7c5a;
+    --verde-suave: #d4ede6;
+    --azul: #1a4a7a;
+    --morado: #5c3d8f;
+    --naranja: #c0692b;
+    --naranja-suave: #fdf3ee;
+    --gris: #6b6b6b;
+    --gris-claro: #e8e4df;
+    --borde: #d0ccc6;
+    --p1: #1e7c5a;
+    --p2: #1a4a7a;
+    --p3: #5c3d8f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--blanco); color: var(--negro); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; }
+
+  /* PORTADA */
+  .portada { background: var(--negro); color: var(--blanco); min-height: 100vh; padding: 80px 60px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+  .portada::before { content: ''; position: absolute; top: -120px; right: -120px; width: 600px; height: 600px; border: 1px solid rgba(255,255,255,0.04); border-radius: 50%; }
+  .portada-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; }
+  .dao-marca { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--amarillo); }
+  .doc-tipo { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,238,0.35); text-align: right; }
+  .portada-centro { position: relative; z-index: 1; text-align: center; padding: 48px 0; }
+  .portada-centro .para-label { font-size: 14px; color: rgba(245,242,238,0.5); margin-bottom: 8px; }
+  .portada-centro .cliente-nombre { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--amarillo); margin-bottom: 24px; }
+  .portada-linea { width: 60px; height: 2px; background: rgba(255,255,255,0.2); margin: 0 auto 24px; }
+  .portada-centro h1 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; line-height: 1.2; color: var(--blanco); margin-bottom: 16px; }
+  .portada-centro .subtitulo { font-size: 16px; font-weight: 300; color: rgba(245,242,238,0.6); }
+  .portada-bottom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; position: relative; z-index: 1; }
+  .pb-item { padding: 0 24px 0 0; border-right: 1px solid rgba(255,255,255,0.08); }
+  .pb-item:last-child { border-right: none; padding-right: 0; padding-left: 24px; }
+  .pb-item:first-child { padding-left: 0; }
+  .pb-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,238,0.35); display: block; margin-bottom: 4px; }
+  .pb-valor { font-size: 13px; font-weight: 500; color: var(--blanco); }
+
+  /* CARTA */
+  .carta { max-width: 760px; margin: 0 auto; padding: 72px 40px; }
+  .carta-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gris); margin-bottom: 32px; display: block; }
+  .carta p { font-size: 16px; line-height: 1.9; color: #2a2a2a; margin-bottom: 20px; }
+  .carta p strong { color: var(--negro); font-weight: 600; }
+  .carta-firma { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--borde); }
+  .cf-nombre { font-size: 16px; font-weight: 600; color: var(--negro); display: block; }
+  .cf-cargo { font-size: 13px; color: var(--gris); display: block; margin-top: 2px; }
+  .cf-empresa { font-size: 13px; color: var(--negro); font-weight: 500; display: block; margin-top: 2px; }
+
+  /* DAO PRESENTACIÓN */
+  .dao-presentacion { background: var(--negro); color: var(--blanco); padding: 64px 60px; }
+  .dp-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amarillo); margin-bottom: 24px; display: block; }
+  .dp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .dp-grid h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+  .dp-grid h2 span { color: var(--amarillo); }
+  .dp-grid p { font-size: 14px; line-height: 1.8; color: rgba(245,242,238,0.75); }
+  .dp-valores { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .dp-valor { border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 16px; }
+  .dp-valor .dv-icono { font-size: 20px; margin-bottom: 8px; display: block; }
+  .dp-valor .dv-titulo { font-size: 13px; font-weight: 600; margin-bottom: 4px; display: block; }
+  .dp-valor .dv-desc { font-size: 12px; color: rgba(245,242,238,0.55); line-height: 1.4; }
+
+  /* CONTENIDO */
+  .contenido { max-width: 960px; margin: 0 auto; padding: 64px 40px; }
+
+  /* SECCIÓN */
+  .seccion { margin-bottom: 56px; }
+  .seccion-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--negro); }
+  .seccion-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--gris); text-transform: uppercase; white-space: nowrap; }
+  .seccion-header h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; }
+
+  /* HALLAZGOS */
+  .hallazgos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+  .hallazgo-card { background: white; border: 1px solid var(--borde); border-radius: 4px; padding: 18px 20px; }
+  .hc-titulo { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .hc-desc { font-size: 13px; color: var(--gris); line-height: 1.5; }
+  .oportunidad { background: var(--negro); color: var(--blanco); border-radius: 4px; padding: 28px 32px; margin-bottom: 8px; }
+  .op-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--amarillo); margin-bottom: 8px; display: block; }
+  .oportunidad p { font-size: 15px; line-height: 1.8; color: rgba(245,242,238,0.85); }
+  .oportunidad p strong { color: var(--amarillo); }
+
+  /* PAQUETES */
+  .paquete { border: 1px solid var(--borde); border-radius: 6px; overflow: hidden; margin-bottom: 28px; }
+  .paquete-header { padding: 32px 36px; position: relative; }
+  .p1 .paquete-header { background: var(--p1); color: white; }
+  .p2 .paquete-header { background: var(--p2); color: white; }
+  .p3 .paquete-header { background: var(--p3); color: white; }
+  .recomendado-badge { position: absolute; top: 20px; right: 24px; background: var(--amarillo); color: var(--negro); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+  .ph-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; display: block; }
+  .ph-nombre { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; margin-bottom: 4px; }
+  .ph-tagline { font-size: 14px; opacity: 0.85; font-style: italic; }
+  .incluye-banner { background: rgba(0,0,0,0.15); padding: 10px 36px; font-size: 12px; color: rgba(255,255,255,0.8); font-style: italic; }
+
+  /* ENTREGABLES */
+  .entregables-cliente { background: white; padding: 28px 36px; }
+  .ec-titulo { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--borde); }
+  .ec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+  .ec-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--gris-claro); }
+  .ec-item:last-child { border-bottom: none; }
+  .ec-check { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .ec-texto { font-size: 13px; color: #333; line-height: 1.4; }
+  .ec-texto strong { font-weight: 600; color: var(--negro); display: block; margin-bottom: 1px; }
+  .ec-texto small { font-size: 11px; color: var(--gris); }
+
+  /* INVERSIÓN */
+  .inversion-paquete { border-top: 1px solid var(--borde); background: #faf8f5; }
+  .ip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .ip-bloque { padding: 20px 28px; border-right: 1px solid var(--borde); }
+  .ip-bloque:last-child { border-right: none; }
+  .ip-tipo { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 4px; display: block; }
+  .ip-monto { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--negro); display: block; line-height: 1; margin-bottom: 2px; }
+  .ip-sub { font-size: 12px; color: var(--gris); }
+  .ip-total { background: var(--negro); color: var(--blanco); padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; }
+  .ip-total-label { font-size: 13px; opacity: 0.7; }
+  .ip-total-monto { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--amarillo); }
+
+  /* COSTOS OPERATIVOS */
+  .costos-operativos { border-top: 1px solid var(--borde); padding: 20px 36px; background: white; }
+  .co-titulo { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 12px; display: block; }
+  .co-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .co-item { display: flex; gap: 10px; align-items: flex-start; }
+  .co-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .co-texto { font-size: 12px; color: #333; line-height: 1.4; }
+  .co-texto strong { font-weight: 600; display: block; }
+  .co-texto span { color: var(--gris); }
+
+  /* MÓDULO PORTAL CLIENTE */
+  .portal-cliente { border: 2px dashed var(--naranja); border-radius: 6px; overflow: hidden; margin-bottom: 28px; }
+  .pc-header { background: var(--naranja-suave); padding: 28px 36px; border-bottom: 1px solid #e8c4b0; }
+  .pc-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--naranja); margin-bottom: 8px; display: block; }
+  .pc-nombre { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--negro); margin-bottom: 4px; }
+  .pc-tagline { font-size: 14px; color: var(--gris); font-style: italic; }
+  .pc-cuerpo { background: white; padding: 28px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .pc-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--naranja); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--borde); }
+  .pc-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+  .pc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--naranja); flex-shrink: 0; margin-top: 8px; }
+  .pc-texto { font-size: 13px; color: #333; line-height: 1.5; }
+  .pc-texto strong { font-weight: 600; color: var(--negro); }
+  .pc-texto small { display: block; font-size: 11px; color: var(--gris); margin-top: 1px; }
+  .pc-footer { background: var(--naranja-suave); border-top: 1px solid #e8c4b0; padding: 18px 36px; display: flex; gap: 16px; align-items: center; }
+  .pc-footer .pf-icon { font-size: 20px; flex-shrink: 0; }
+  .pc-footer p { font-size: 13px; color: #6b3200; line-height: 1.5; }
+  .pc-footer p strong { color: #4a2000; font-weight: 600; }
+
+  /* TABLA COMPARATIVA */
+  .tabla-comp { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 8px; }
+  .tabla-comp thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid var(--negro); }
+  .tabla-comp thead th:first-child { background: white; color: var(--negro); }
+  .tabla-comp thead th.th-p1 { background: var(--p1); color: white; text-align: center; }
+  .tabla-comp thead th.th-p2 { background: var(--p2); color: white; text-align: center; }
+  .tabla-comp thead th.th-p3 { background: var(--p3); color: white; text-align: center; }
+  .tabla-comp thead th.th-p4 { background: var(--naranja); color: white; text-align: center; }
+  .tabla-comp tbody td { padding: 11px 16px; border-bottom: 1px solid var(--borde); }
+  .tabla-comp tbody tr:nth-child(even) td { background: #faf8f5; }
+  .tabla-comp tbody td:not(:first-child) { text-align: center; }
+  .check { color: var(--verde); font-size: 16px; font-weight: 700; }
+  .cross { color: var(--gris-claro); font-size: 18px; }
+  .pending { color: var(--naranja); font-size: 13px; font-weight: 600; }
+  .tabla-comp tfoot td { padding: 14px 16px; border-top: 2px solid var(--negro); font-weight: 700; font-size: 14px; }
+  .tabla-comp tfoot td:not(:first-child) { text-align: center; font-family: 'Playfair Display', serif; font-size: 20px; }
+  .tabla-comp tfoot .tf-p1 { color: var(--p1); }
+  .tabla-comp tfoot .tf-p2 { color: var(--p2); }
+  .tabla-comp tfoot .tf-p3 { color: var(--p3); }
+  .tabla-comp tfoot .tf-p4 { color: var(--naranja); font-size: 14px; }
+  .nota-tabla { font-size: 12px; color: var(--gris); font-style: italic; margin-top: 8px; padding-left: 4px; }
+
+  /* CONDICIONES */
+  .condiciones-list { background: white; border: 1px solid var(--borde); border-radius: 4px; overflow: hidden; }
+  .cond-item { display: flex; gap: 16px; padding: 16px 22px; border-bottom: 1px solid var(--borde); align-items: flex-start; }
+  .cond-item:last-child { border-bottom: none; }
+  .cond-num { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; color: var(--amarillo); background: var(--negro); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .cond-texto { font-size: 14px; color: #333; line-height: 1.6; }
+  .cond-texto strong { color: var(--negro); font-weight: 600; }
+
+  /* PRÓXIMOS PASOS */
+  .siguientes-pasos { background: var(--negro); color: var(--blanco); padding: 48px 60px; margin: 0 -40px; text-align: center; }
+  .sp-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amarillo); margin-bottom: 16px; display: block; }
+  .siguientes-pasos h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
+  .siguientes-pasos h2 span { color: var(--amarillo); }
+  .siguientes-pasos p { font-size: 15px; color: rgba(245,242,238,0.7); max-width: 600px; margin: 0 auto 32px; line-height: 1.7; }
+  .sp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 800px; margin: 0 auto; }
+  .sp-paso { border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 18px 14px; text-align: center; }
+  .sp-paso .spp-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--amarillo); opacity: 0.4; display: block; line-height: 1; margin-bottom: 8px; }
+  .sp-paso .spp-texto { font-size: 12px; color: rgba(245,242,238,0.75); line-height: 1.4; }
+
+  /* ACEPTACIÓN */
+  .aceptacion { background: white; border: 1px solid var(--borde); border-radius: 4px; padding: 36px; margin-top: 40px; }
+  .ac-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 16px; display: block; }
+  .ac-texto { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 36px; }
+  .ac-texto strong { color: var(--negro); }
+  .ac-firmas { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .ac-firma-bloque label { font-size: 12px; color: var(--gris); letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 40px; }
+  .ac-linea { border-top: 1px solid var(--negro); margin-bottom: 8px; }
+  .ac-nombre { font-size: 13px; font-weight: 600; }
+  .ac-cargo { font-size: 12px; color: var(--gris); }
+  .ac-fecha { margin-top: 24px; font-size: 13px; color: var(--gris); }
+
+  .vigencia { background: var(--amarillo-suave); border: 1px solid var(--amarillo); border-radius: 4px; padding: 18px 24px; margin-top: 20px; display: flex; gap: 12px; align-items: center; }
+  .vigencia p { font-size: 13px; color: #6b4f00; }
+  .vigencia p strong { color: #4a3500; }
+
+  footer { background: var(--negro); color: rgba(245,242,238,0.35); text-align: center; padding: 24px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  footer span { color: var(--amarillo); }
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <div class="portada-top">
+    <span class="dao-marca">DAO Consulting & Learning Hub</span>
+    <span class="doc-tipo">Propuesta Comercial<br>Confidencial · v2</span>
+  </div>
+  <div class="portada-centro">
+    <p class="para-label">Preparada exclusivamente para</p>
+    <div class="cliente-nombre">AS Capital</div>
+    <div class="portada-linea"></div>
+    <h1>Ecosistema Digital,<br>Operativo y Tecnológico</h1>
+    <p class="subtitulo">Transformación integral en tres etapas — Puebla, 2026</p>
+  </div>
+  <div class="portada-bottom">
+    <div class="pb-item"><span class="pb-label">Preparada por</span><span class="pb-valor">DAO Consulting & Learning Hub</span></div>
+    <div class="pb-item" style="padding-left:24px;"><span class="pb-label">Dirigida a</span><span class="pb-valor">Sandra Romero Cadena, CEO</span></div>
+    <div class="pb-item" style="padding-left:24px;"><span class="pb-label">Fecha</span><span class="pb-valor">Mayo 2026</span></div>
+    <div class="pb-item"><span class="pb-label">Vigencia</span><span class="pb-valor">30 días naturales</span></div>
+  </div>
+</div>
+
+<!-- CARTA -->
+<div class="carta">
+  <span class="carta-tag">Carta de presentación</span>
+  <p>Estimada Sandra,</p>
+  <p>En nuestra reunión del 18 de mayo confirmaron algo que ya intuíamos desde el diagnóstico: AS Capital sabe exactamente dónde están sus áreas de oportunidad. Lo que necesitan es a alguien que les ayude a resolverlas en el orden correcto y con las herramientas adecuadas.</p>
+  <p>Esta propuesta incorpora todo lo que discutimos: la ruta de implementación por fases, el filtro de prospectos que evite citas improductivas, y una solución para que sus clientes puedan consultar el avance de su caso en tiempo real — sin necesidad de llamar. Ese portal de seguimiento post-venta que describieron es una prioridad que tomamos en serio y que incluimos como módulo adicional en desarrollo.</p>
+  <p>Presentamos tres paquetes que van del más esencial al más completo. Pueden iniciar donde mejor se acomode a su momento actual y escalar cuando estén listos. <strong>Nada de lo que construyan en una etapa se tira en la siguiente — todo suma.</strong></p>
+  <p>Quedamos a su disposición para resolver cualquier duda.</p>
+  <div class="carta-firma">
+    <span class="cf-nombre">Miguel Ángel Hernández</span>
+    <span class="cf-cargo">Director de Consultoría</span>
+    <span class="cf-empresa">DAO Consulting & Learning Hub</span>
+  </div>
+</div>
+
+<!-- PRESENTACIÓN DAO -->
+<div class="dao-presentacion">
+  <span class="dp-tag">Quiénes somos</span>
+  <div class="dp-grid">
+    <div>
+      <h2>Consultoría estratégica con <span>tecnología de vanguardia</span></h2>
+      <p>DAO Consulting & Learning Hub es una firma de consultoría digital y tecnológica especializada en transformación operativa para empresas en crecimiento. Combinamos estrategia de negocio, identidad de marca, desarrollo digital y automatización con inteligencia artificial en una sola propuesta integrada. No vendemos herramientas — diseñamos soluciones que se adaptan al ADN de cada organización.</p>
+    </div>
+    <div class="dp-valores">
+      <div class="dp-valor"><span class="dv-icono">🎯</span><span class="dv-titulo">Diagnóstico primero</span><span class="dv-desc">Cada solución parte de hallazgos reales de su empresa, no de plantillas genéricas.</span></div>
+      <div class="dp-valor"><span class="dv-icono">🔗</span><span class="dv-titulo">Implementación integrada</span><span class="dv-desc">Marca, operación, tecnología y captación como un solo sistema coherente.</span></div>
+      <div class="dp-valor"><span class="dv-icono">📐</span><span class="dv-titulo">Por fases escalables</span><span class="dv-desc">Cada etapa entrega valor concreto antes de pasar a la siguiente.</span></div>
+      <div class="dp-valor"><span class="dv-icono">🤝</span><span class="dv-titulo">Acompañamiento real</span><span class="dv-desc">Nos sentamos con el equipo hasta que cada sistema funciona.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENIDO -->
+<div class="contenido">
+
+  <!-- DIAGNÓSTICO -->
+  <div class="seccion">
+    <div class="seccion-header"><span class="seccion-num">01</span><h2>Lo que encontramos — base de esta propuesta</h2></div>
+    <div class="hallazgos-grid">
+      <div class="hallazgo-card" style="border-left:4px solid #c0392b;">
+        <div class="hc-titulo">Presencia digital en punto de partida</div>
+        <div class="hc-desc">Sin sitio web, sin redes sólidas, sin identidad visual. El mercado no puede verificar a AS Capital antes de contactarlos.</div>
+      </div>
+      <div class="hallazgo-card" style="border-left:4px solid #c0392b;">
+        <div class="hc-titulo">Organización documental dispersa</div>
+        <div class="hc-desc">Los expedientes llegan por múltiples canales sin sistema centralizado. Localizar información consume tiempo valioso.</div>
+      </div>
+      <div class="hallazgo-card" style="border-left:4px solid var(--amarillo);">
+        <div class="hc-titulo">Prospectos no calificados consumen tiempo</div>
+        <div class="hc-desc">Han tenido citas presenciales con personas que preguntan por crédito hipotecario, aunque la operación es exclusivamente de contado.</div>
+      </div>
+      <div class="hallazgo-card" style="border-left:4px solid var(--amarillo);">
+        <div class="hc-titulo">Clientes que buscan actualizaciones constantemente</div>
+        <div class="hc-desc">Sin un portal de seguimiento, los clientes llaman repetidamente para preguntar el estatus de su caso — fricción para ambos lados.</div>
+      </div>
+    </div>
+    <div class="oportunidad">
+      <span class="op-tag">La oportunidad</span>
+      <p>En un mercado con fraudes frecuentes y sin un líder claro, <strong>AS Capital tiene el diferenciador correcto: garantía de inversión por contrato.</strong> Construir la infraestructura digital y operativa que respalde ese diferenciador no es un gasto — es el activo que convertirá la confianza en crecimiento escalable.</p>
+    </div>
+  </div>
+
+  <!-- PAQUETES -->
+  <div class="seccion">
+    <div class="seccion-header"><span class="seccion-num">02</span><h2>Propuesta de implementación</h2></div>
+
+    <!-- P1 -->
+    <div class="paquete p1">
+      <div class="paquete-header">
+        <span class="recomendado-badge">Punto de entrada recomendado</span>
+        <span class="ph-tag">Paquete 1 · 8 semanas</span>
+        <div class="ph-nombre">Fundacional</div>
+        <div class="ph-tagline">"AS Capital existe en el mundo digital y comienza a captar sus primeros prospectos"</div>
+      </div>
+      <div class="entregables-cliente">
+        <div class="ec-titulo">Lo que reciben al finalizar este paquete</div>
+        <div class="ec-grid">
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Identidad visual completa</strong><small>Logo, paleta, tipografía, manual de marca y plantillas de comunicación</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Sitio web profesional</strong><small>Landing page estructurada por perfil de cliente con formulario de contacto y llamada a la acción</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Sistema de gestión de expedientes</strong><small>Panel centralizado con roles de acceso. Cualquier dato localizable en menos de 2 minutos</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Base de prospectos con seguimiento</strong><small>Registro estructurado con responsable asignado y protocolo de atención por perfil</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Facebook, Instagram y WhatsApp Business activos</strong><small>Configurados con identidad, respuestas rápidas y plan editorial inicial de 30 días</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Campañas de captación configuradas</strong><small>Anuncios activos segmentados por perfil. Presupuesto de pauta corre por cuenta de AS Capital</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Asistente de respuesta inmediata</strong><small>Primer nivel de atención en WhatsApp y redes que responde consultas frecuentes al instante</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Capacitación del equipo comercial</strong><small>Sesión práctica para adopción del sistema, protocolo y guión por perfil de cliente</small></div></div>
+        </div>
+      </div>
+      <div class="inversion-paquete">
+        <div class="ip-grid">
+          <div class="ip-bloque"><span class="ip-tipo">Honorarios de implementación</span><span class="ip-monto">$73,000</span><span class="ip-sub">MXN · pago único</span></div>
+          <div class="ip-bloque"><span class="ip-tipo">Estructura de pago</span><span class="ip-monto" style="font-size:20px;">50% / 50%</span><span class="ip-sub">50% al firmar · 50% al inicio del desarrollo</span></div>
+        </div>
+        <div class="ip-total"><span class="ip-total-label">Inversión total — Paquete Fundacional</span><span class="ip-total-monto">$73,000 MXN</span></div>
+      </div>
+      <div class="costos-operativos">
+        <span class="co-titulo">Costos operativos mensuales que corren por cuenta de AS Capital</span>
+        <div class="co-items">
+          <div class="co-item"><span class="co-icon">🌐</span><div class="co-texto"><strong>Plataforma web</strong><span>~$450–500 MXN/mes</span></div></div>
+          <div class="co-item"><span class="co-icon">📋</span><div class="co-texto"><strong>Plataforma de gestión</strong><span>~$300–480 MXN/mes</span></div></div>
+          <div class="co-item"><span class="co-icon">📣</span><div class="co-texto"><strong>Presupuesto de campañas</strong><span>Variable · mínimo recomendado $3,000/mes</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="paquete p2">
+      <div class="paquete-header">
+        <span class="ph-tag">Paquete 2 · 14 semanas · Incluye todo el Paquete 1</span>
+        <div class="ph-nombre">Captación Inteligente</div>
+        <div class="ph-tagline">"Solo llegan a AS Capital los prospectos que ya entienden el modelo y tienen capacidad de compra"</div>
+      </div>
+      <div class="incluye-banner">✓ Todo el Paquete Fundacional incluido — lo siguiente es adicional</div>
+      <div class="entregables-cliente">
+        <div class="ec-titulo">Adicionalmente, AS Capital recibe</div>
+        <div class="ec-grid">
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Asistente inteligente conversacional 24/7</strong><small>Atiende prospectos de forma fluida en Facebook, Instagram y WhatsApp — en cualquier momento</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Filtro automático de prospectos no calificados</strong><small>El sistema descarta automáticamente a quien pregunte por crédito hipotecario antes de que llegue a una cita presencial. Solo avanzan perfiles compatibles con el modelo de contado</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Clasificación por perfil antes del contacto humano</strong><small>El sistema identifica si el interesado es comprador, inversionista o acreditado y lo enruta al asesor correcto</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Campaña digital dirigida a deudores y acreditados</strong><small>Comunicación empática para personas con inmuebles en proceso judicial que pueden negociar extrajudicialmente</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Tablero de métricas comerciales</strong><small>Indicadores en tiempo real: prospectos, origen, tiempo de respuesta, citas y cierres</small></div></div>
+        </div>
+      </div>
+      <div class="inversion-paquete">
+        <div class="ip-grid">
+          <div class="ip-bloque"><span class="ip-tipo">Honorarios de implementación total</span><span class="ip-monto">$119,000</span><span class="ip-sub">MXN · Paquetes 1 + 2 acumulados</span></div>
+          <div class="ip-bloque"><span class="ip-tipo">Mantenimiento tecnológico mensual</span><span class="ip-monto">$4,500</span><span class="ip-sub">MXN/mes · operación de los asistentes inteligentes</span></div>
+        </div>
+        <div class="ip-total"><span class="ip-total-label">Inversión total de implementación — Paquete Captación Inteligente</span><span class="ip-total-monto">$119,000 MXN</span></div>
+      </div>
+      <div class="costos-operativos">
+        <span class="co-titulo">Costos operativos mensuales — Paquete 2 activo</span>
+        <div class="co-items">
+          <div class="co-item"><span class="co-icon">🌐</span><div class="co-texto"><strong>Plataformas web y gestión</strong><span>~$750–980 MXN/mes</span></div></div>
+          <div class="co-item"><span class="co-icon">⚙️</span><div class="co-texto"><strong>Mantenimiento tecnológico</strong><span>$4,500 MXN/mes</span></div></div>
+          <div class="co-item"><span class="co-icon">📣</span><div class="co-texto"><strong>Presupuesto de campañas</strong><span>Variable · mínimo $5,000/mes</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="paquete p3">
+      <div class="paquete-header">
+        <span class="ph-tag">Paquete 3 · 22 semanas · Incluye Paquetes 1 y 2</span>
+        <div class="ph-nombre">Ecosistema Completo</div>
+        <div class="ph-tagline">"La operación interna de AS Capital también trabaja de forma autónoma"</div>
+      </div>
+      <div class="incluye-banner">✓ Todo lo de los Paquetes 1 y 2, más lo siguiente</div>
+      <div class="entregables-cliente">
+        <div class="ec-titulo">Adicionalmente, AS Capital recibe</div>
+        <div class="ec-grid">
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Gestión inteligente de citas y visitas a inmuebles</strong><small>El sistema agenda y optimiza recorridos evitando traslapes entre asesores</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Consultor jurídico interno automatizado</strong><small>Sistema privado con normativa y contratos de AS Capital. Responde consultas legales internas y alerta sobre puntos críticos en documentos</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Búsqueda de expedientes desde el celular</strong><small>Cualquier miembro del equipo obtiene datos de cualquier crédito desde WhatsApp en segundos, estén donde estén</small></div></div>
+          <div class="ec-item"><span class="ec-check">✦</span><div class="ec-texto"><strong>Infraestructura tecnológica privada y segura</strong><small>Toda la información legal opera en un entorno propio. Los datos de AS Capital no salen de su sistema</small></div></div>
+        </div>
+      </div>
+      <div class="inversion-paquete">
+        <div class="ip-grid">
+          <div class="ip-bloque"><span class="ip-tipo">Honorarios de implementación total</span><span class="ip-monto">$168,000</span><span class="ip-sub">MXN · Paquetes 1 + 2 + 3 acumulados</span></div>
+          <div class="ip-bloque"><span class="ip-tipo">Mantenimiento tecnológico mensual</span><span class="ip-monto">$8,500</span><span class="ip-sub">MXN/mes · ecosistema completo</span></div>
+        </div>
+        <div class="ip-total"><span class="ip-total-label">Inversión total de implementación — Ecosistema Completo</span><span class="ip-total-monto">$168,000 MXN</span></div>
+      </div>
+      <div class="costos-operativos">
+        <span class="co-titulo">Costos operativos mensuales — Paquete 3 activo</span>
+        <div class="co-items">
+          <div class="co-item"><span class="co-icon">🌐</span><div class="co-texto"><strong>Plataformas web y gestión</strong><span>~$750–980 MXN/mes</span></div></div>
+          <div class="co-item"><span class="co-icon">⚙️</span><div class="co-texto"><strong>Mantenimiento tecnológico</strong><span>$8,500 MXN/mes</span></div></div>
+          <div class="co-item"><span class="co-icon">📣</span><div class="co-texto"><strong>Presupuesto de campañas</strong><span>Variable · mínimo $5,000/mes</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTAL -->
+    <div class="portal-cliente">
+      <div class="pc-header">
+        <span class="pc-tag">Módulo adicional — Identificado en nuestra reunión del 18 de mayo</span>
+        <div class="pc-nombre">Portal de Seguimiento para Clientes</div>
+        <div class="pc-tagline">"El cliente entra con su usuario y ve en tiempo real el avance de su caso — sin necesidad de llamar"</div>
+      </div>
+      <div class="pc-cuerpo">
+        <div class="pc-col">
+          <h4>Qué resuelve este módulo</h4>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Acceso personalizado por cliente</strong><small>Usuario y contraseña únicos para cada cliente activo</small></div></div>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Línea de tiempo del caso</strong><small>Pagos de agua, predial, CFE, cesión de derechos, acuerdos de juzgado, remisión de expediente — con fecha de cada acción</small></div></div>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Acceso a documentos relevantes</strong><small>Constancias y acuses disponibles en la plataforma sin necesidad de solicitarlos</small></div></div>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Alerta de venta desde el sistema</strong><small>El cliente envía una solicitud de venta directamente desde su portal — AS Capital la recibe como notificación sin intermediarios</small></div></div>
+        </div>
+        <div class="pc-col">
+          <h4>Impacto para AS Capital</h4>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Reducción de llamadas repetitivas</strong><small>El cliente se informa solo. El equipo deja de responder "no hay avance" a diario</small></div></div>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Clientes más tranquilos y mejor informados</strong><small>La visibilidad genera confianza. Un cliente informado no desespera</small></div></div>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Diferenciador de servicio único en el sector</strong><small>Ninguna empresa de remates bancarios en Puebla ofrece este nivel de transparencia al cliente activo</small></div></div>
+          <div class="pc-item"><div class="pc-dot"></div><div class="pc-texto"><strong>Accesible desde web y celular</strong><small>El cliente accede desde cualquier dispositivo con el botón "Acceso Clientes" en el sitio web</small></div></div>
+        </div>
+      </div>
+      <div class="pc-footer">
+        <span class="pf-icon">📐</span>
+        <p><strong>Este módulo se cotiza por separado.</strong> Estamos terminando de definir el alcance técnico para presentarles una propuesta específica en los próximos días. No bloquea el inicio de ninguno de los tres paquetes — puede contratarse en paralelo o después de la primera fase.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO -->
+  <div class="seccion">
+    <div class="seccion-header"><span class="seccion-num">03</span><h2>Comparativo de paquetes</h2></div>
+    <table class="tabla-comp">
+      <thead>
+        <tr>
+          <th>Capacidad</th>
+          <th class="th-p1">Fundacional</th>
+          <th class="th-p2">Captación Inteligente</th>
+          <th class="th-p3">Ecosistema Completo</th>
+          <th class="th-p4">Portal (+)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Identidad visual y marca</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Sitio web profesional</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Sistema de gestión de expedientes</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Base de prospectos con seguimiento</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Redes sociales y campañas activas</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Atención automática 24/7</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Filtro automático de prospectos sin contado</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Campaña para acreditados y deudores</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Tablero de métricas comerciales</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Gestión de citas y visitas a inmuebles</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Consultor jurídico interno</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Búsqueda de expedientes desde el celular</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Portal de seguimiento para clientes</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="pending">En cotización</span></td></tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Inversión de implementación</td>
+          <td class="tf-p1">$73,000</td>
+          <td class="tf-p2">$119,000</td>
+          <td class="tf-p3">$168,000</td>
+          <td class="tf-p4">Próximamente</td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="nota-tabla">* Precios en MXN + IVA. Costos operativos mensuales (plataformas, mantenimiento y campañas) son adicionales y corren por cuenta de AS Capital.</p>
+  </div>
+
+  <!-- CONDICIONES -->
+  <div class="seccion">
+    <div class="seccion-header"><span class="seccion-num">04</span><h2>Condiciones de la propuesta</h2></div>
+    <div class="condiciones-list">
+      <div class="cond-item"><div class="cond-num">1</div><div class="cond-texto"><strong>Acuerdo de Confidencialidad previo al inicio.</strong> Ningún material sensible se intercambia sin NDA firmado. Aplica para ambas partes.</div></div>
+      <div class="cond-item"><div class="cond-num">2</div><div class="cond-texto"><strong>Estructura de pagos: 50% al firmar + 50% al inicio del desarrollo.</strong> Los paquetes son acumulativos — el Paquete 2 requiere el Paquete 1 activo.</div></div>
+      <div class="cond-item"><div class="cond-num">3</div><div class="cond-texto"><strong>Aprobaciones en máximo 5 días hábiles.</strong> Retrasos en aprobaciones impactan el calendario proporcionalmente.</div></div>
+      <div class="cond-item"><div class="cond-num">4</div><div class="cond-texto"><strong>Hasta 2 rondas de revisión por entregable.</strong> Cambios de alcance fuera de lo acordado se cotizan por separado.</div></div>
+      <div class="cond-item"><div class="cond-num">5</div><div class="cond-texto"><strong>Propiedad de entregables:</strong> al completar el pago de cada paquete, todos sus entregables son propiedad de AS Capital sin restricciones.</div></div>
+      <div class="cond-item"><div class="cond-num">6</div><div class="cond-texto"><strong>Vigencia: 30 días naturales</strong> a partir de la fecha de esta propuesta.</div></div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS PASOS -->
+  <div class="siguientes-pasos">
+    <span class="sp-tag">Para iniciar</span>
+    <h2>Cuatro pasos para<br>arrancar <span>esta semana</span></h2>
+    <p>No necesitan tener todo definido para dar el primer paso. Solo necesitamos una decisión y una firma.</p>
+    <div class="sp-grid">
+      <div class="sp-paso"><span class="spp-num">1</span><span class="spp-texto">Confirmar el paquete con el que desean iniciar</span></div>
+      <div class="sp-paso"><span class="spp-num">2</span><span class="spp-texto">Firmar el acuerdo de confidencialidad</span></div>
+      <div class="sp-paso"><span class="spp-num">3</span><span class="spp-texto">Primer pago del 50% para activar la Fase 0</span></div>
+      <div class="sp-paso"><span class="spp-num">4</span><span class="spp-texto">Recibir la cotización del portal de seguimiento como módulo complementario</span></div>
+    </div>
+  </div>
+
+  <!-- ACEPTACIÓN -->
+  <div class="aceptacion">
+    <span class="ac-tag">Sección de aceptación</span>
+    <p class="ac-texto">Al firmar este documento, <strong>AS Capital</strong> acepta los términos, condiciones, alcance y precios descritos en esta propuesta y autoriza a <strong>DAO Consulting & Learning Hub</strong> a iniciar los trabajos del paquete seleccionado una vez recibido el anticipo acordado.</p>
+    <p class="ac-texto"><strong>Paquete seleccionado:</strong> &nbsp; ☐ Fundacional ($73,000) &nbsp;&nbsp; ☐ Captación Inteligente ($119,000) &nbsp;&nbsp; ☐ Ecosistema Completo ($168,000)</p>
+    <div class="ac-firmas">
+      <div class="ac-firma-bloque">
+        <label>Por AS Capital</label>
+        <div class="ac-linea"></div>
+        <span class="ac-nombre">Sandra Erika Romero Cadena</span>
+        <span class="ac-cargo">CEO y Fundadora — AS Capital</span>
+        <div class="ac-fecha">Fecha: _______________________</div>
+      </div>
+      <div class="ac-firma-bloque">
+        <label>Por DAO Consulting & Learning Hub</label>
+        <div class="ac-linea"></div>
+        <span class="ac-nombre">Miguel Ángel Hernández</span>
+        <span class="ac-cargo">Director de Consultoría — DAO C&L Hub</span>
+        <div class="ac-fecha">Fecha: _______________________</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vigencia">
+    <span style="font-size:18px;flex-shrink:0;">📅</span>
+    <p><strong>Vigencia: 30 días naturales a partir de la fecha de presentación.</strong> Para iniciar, confirmar paquete y firmar el NDA. El primer pago activa formalmente la Fase 0.</p>
+  </div>
+
+</div>
+
+<footer>
+  <span>DAO Consulting & Learning Hub</span> · Propuesta confidencial preparada exclusivamente para AS Capital · Mayo 2026
+</footer>
+
+</body>
+</html>

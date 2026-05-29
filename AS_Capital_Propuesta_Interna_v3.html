@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Comercial Interna v3 — AS Capital | DAO Consulting & Learning Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0d0d0d;
+    --blanco: #f5f2ee;
+    --rojo: #c0392b;
+    --rojo-suave: #fdf0ee;
+    --amarillo: #e8b84b;
+    --amarillo-suave: #faf3de;
+    --verde: #1e7c5a;
+    --verde-suave: #d4ede6;
+    --azul: #1a4a7a;
+    --azul-suave: #dce8f5;
+    --morado: #5c3d8f;
+    --morado-suave: #ede7f6;
+    --naranja: #c0692b;
+    --naranja-suave: #fdf3ee;
+    --gris: #6b6b6b;
+    --gris-claro: #e8e4df;
+    --borde: #d0ccc6;
+    --p1: #1e7c5a;
+    --p2: #1a4a7a;
+    --p3: #5c3d8f;
+    --p4: #c0692b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--blanco); color: var(--negro); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; }
+
+  /* PORTADA */
+  .portada { background: var(--negro); color: var(--blanco); padding: 80px 60px 60px; position: relative; overflow: hidden; }
+  .portada::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border: 1px solid rgba(255,255,255,0.05); border-radius: 50%; }
+  .tag-dao { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--amarillo); margin-bottom: 32px; display: block; }
+  .portada h1 { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; }
+  .portada h1 span { color: var(--amarillo); }
+  .portada .subtitulo { font-size: 18px; font-weight: 300; color: rgba(245,242,238,0.65); margin-bottom: 48px; }
+  .portada-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 32px; position: relative; z-index: 1; }
+  .meta-item label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,238,0.4); display: block; margin-bottom: 4px; }
+  .meta-item span { font-size: 13px; font-weight: 500; color: var(--blanco); }
+
+  /* CONTENIDO */
+  .contenido { max-width: 960px; margin: 0 auto; padding: 64px 40px; }
+
+  /* AVISOS */
+  .aviso { border-radius: 4px; padding: 20px 24px; margin-bottom: 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .aviso.interno { background: #fff8e1; border: 1px solid var(--amarillo); border-left: 4px solid var(--amarillo); }
+  .aviso.nuevo { background: var(--naranja-suave); border: 1px solid var(--naranja); border-left: 4px solid var(--naranja); }
+  .aviso.pendiente { background: var(--morado-suave); border: 1px solid var(--morado); border-left: 4px solid var(--morado); }
+  .aviso p { font-size: 13px; line-height: 1.6; }
+  .aviso.interno p { color: #6b4f00; }
+  .aviso.nuevo p { color: #6b3200; }
+  .aviso.pendiente p { color: #3d2060; }
+  .aviso p strong { font-weight: 700; }
+
+  /* SECCIÓN */
+  .seccion { margin-bottom: 56px; }
+  .seccion-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--negro); }
+  .seccion-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--gris); text-transform: uppercase; white-space: nowrap; }
+  .seccion-header h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; }
+
+  /* MAPA DE COSTOS */
+  .mapa-costos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 8px; }
+  .mc-card { background: white; border: 1px solid var(--borde); border-radius: 4px; padding: 18px; text-align: center; }
+  .mc-card .mc-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+  .mc-card .mc-tipo { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gris); margin-bottom: 4px; display: block; }
+  .mc-card .mc-quien { font-size: 13px; font-weight: 600; color: var(--negro); display: block; margin-bottom: 4px; }
+  .mc-card .mc-cuando { font-size: 11px; color: var(--gris); }
+  .mc-card.honorario { border-top: 3px solid var(--negro); }
+  .mc-card.plataforma { border-top: 3px solid var(--azul); }
+  .mc-card.retainer { border-top: 3px solid var(--morado); }
+  .mc-card.ads { border-top: 3px solid var(--rojo); }
+
+  /* PAQUETES */
+  .paquete { border: 1px solid var(--borde); border-radius: 6px; overflow: hidden; margin-bottom: 32px; }
+  .paquete-header { padding: 32px 36px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; }
+  .p1 .paquete-header { background: var(--p1); color: white; }
+  .p2 .paquete-header { background: var(--p2); color: white; }
+  .p3 .paquete-header { background: var(--p3); color: white; }
+  .p4 .paquete-header { background: var(--p4); color: white; }
+
+  .ph-etiqueta { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; display: block; }
+  .ph-nombre { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; margin-bottom: 4px; }
+  .ph-tagline { font-size: 14px; opacity: 0.8; font-style: italic; }
+  .ph-duracion { text-align: right; }
+  .ph-duracion .dur-val { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; line-height: 1; display: block; }
+  .ph-duracion .dur-label { font-size: 11px; opacity: 0.6; letter-spacing: 1px; }
+
+  .incluye-banner { background: rgba(0,0,0,0.15); padding: 10px 36px; font-size: 12px; opacity: 0.9; color: white; font-style: italic; }
+
+  .paquete-entregables { background: white; padding: 28px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .ent-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--borde); }
+  .p1 .ent-col.dao h4 { color: var(--p1); }
+  .p2 .ent-col.dao h4 { color: var(--p2); }
+  .p3 .ent-col.dao h4 { color: var(--p3); }
+  .p4 .ent-col.dao h4 { color: var(--p4); }
+  .ent-col.emmanuel h4 { color: var(--morado); }
+
+  .ent-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+  .ei-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+  .p1 .dao .ei-dot { background: var(--p1); }
+  .p2 .dao .ei-dot { background: var(--p2); }
+  .p3 .dao .ei-dot { background: var(--p3); }
+  .p4 .dao .ei-dot { background: var(--p4); }
+  .emmanuel .ei-dot { background: var(--morado); }
+  .ei-texto { font-size: 13px; color: #333; line-height: 1.5; }
+  .ei-texto strong { font-weight: 600; color: var(--negro); }
+  .ei-texto small { display: block; font-size: 11px; color: var(--gris); margin-top: 1px; }
+  .ei-nuevo { background: var(--naranja-suave); border: 1px solid var(--naranja); border-radius: 3px; padding: 2px 6px; font-size: 10px; font-weight: 700; color: var(--naranja); text-transform: uppercase; letter-spacing: 1px; margin-left: 6px; vertical-align: middle; }
+
+  /* COSTOS PAQUETE */
+  .paquete-costos { border-top: 1px solid var(--borde); background: #faf8f5; }
+  .costos-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .costo-bloque { padding: 20px 24px; border-right: 1px solid var(--borde); }
+  .costo-bloque:last-child { border-right: none; }
+  .cb-tipo { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 4px; display: block; }
+  .cb-quien { font-size: 12px; color: var(--gris); margin-bottom: 8px; display: block; }
+  .cb-monto { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--negro); display: block; line-height: 1; margin-bottom: 2px; }
+  .cb-sub { font-size: 11px; color: var(--gris); }
+  .costo-total { background: var(--negro); color: var(--blanco); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .ct-label { font-size: 13px; opacity: 0.7; }
+  .ct-monto { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--amarillo); }
+
+  /* COSTOS MENSUALES */
+  .costos-mensuales { border-top: 1px solid var(--borde); padding: 20px 36px; background: white; }
+  .cm-titulo { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 12px; display: block; }
+  .cm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .cm-item { display: flex; gap: 10px; align-items: center; }
+  .cm-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .cm-dot.azul { background: var(--azul); }
+  .cm-dot.morado { background: var(--morado); }
+  .cm-dot.rojo { background: var(--rojo); }
+  .cm-dot.naranja { background: var(--naranja); }
+  .cm-texto { font-size: 12px; color: #333; line-height: 1.4; }
+  .cm-texto strong { font-weight: 600; display: block; }
+  .cm-texto span { color: var(--gris); }
+
+  /* MÓDULO PORTAL */
+  .modulo-portal { border: 2px solid var(--naranja); border-radius: 6px; overflow: hidden; margin-bottom: 32px; }
+  .mp-header { background: var(--naranja); color: white; padding: 28px 36px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .mp-badge { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  .mp-cuerpo { background: white; padding: 28px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .mp-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--naranja); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--borde); }
+
+  /* TECH OPTIONS */
+  .tech-opciones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  .tech-card { border: 1px solid var(--borde); border-radius: 4px; padding: 16px; background: white; }
+  .tc-recomendada { border: 2px solid var(--verde); }
+  .tc-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .tc-recomendada .tc-tag { color: var(--verde); }
+  .tech-card:not(.tc-recomendada) .tc-tag { color: var(--gris); }
+  .tc-nombre { font-size: 14px; font-weight: 700; margin-bottom: 6px; display: block; }
+  .tc-desc { font-size: 12px; color: var(--gris); line-height: 1.4; margin-bottom: 8px; }
+  .tc-costo { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--negro); font-weight: 600; }
+
+  /* TABLA COMPARATIVA */
+  .tabla-comp { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 8px; }
+  .tabla-comp thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid var(--negro); }
+  .tabla-comp thead th:first-child { color: var(--negro); background: white; }
+  .tabla-comp thead th.th-p1 { background: var(--p1); color: white; text-align: center; }
+  .tabla-comp thead th.th-p2 { background: var(--p2); color: white; text-align: center; }
+  .tabla-comp thead th.th-p3 { background: var(--p3); color: white; text-align: center; }
+  .tabla-comp thead th.th-p4 { background: var(--p4); color: white; text-align: center; }
+  .tabla-comp tbody td { padding: 11px 16px; border-bottom: 1px solid var(--borde); }
+  .tabla-comp tbody tr:nth-child(even) td { background: #faf8f5; }
+  .tabla-comp tbody td:not(:first-child) { text-align: center; }
+  .check { color: var(--verde); font-weight: 700; font-size: 16px; }
+  .cross { color: var(--gris-claro); font-size: 18px; }
+  .tabla-comp tfoot td { padding: 14px 16px; border-top: 2px solid var(--negro); font-weight: 700; }
+  .tabla-comp tfoot td:not(:first-child) { text-align: center; font-family: 'Playfair Display', serif; font-size: 18px; }
+  .tabla-comp tfoot .tf-p1 { color: var(--p1); }
+  .tabla-comp tfoot .tf-p2 { color: var(--p2); }
+  .tabla-comp tfoot .tf-p3 { color: var(--p3); }
+  .tabla-comp tfoot .tf-p4 { color: var(--p4); }
+
+  /* OPORTUNIDAD FUTURA */
+  .oportunidad-futura { background: var(--negro); color: var(--blanco); border-radius: 4px; padding: 28px 32px; margin-bottom: 16px; }
+  .of-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amarillo); margin-bottom: 8px; display: block; }
+  .oportunidad-futura h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 10px; }
+  .oportunidad-futura p { font-size: 14px; color: rgba(245,242,238,0.8); line-height: 1.7; }
+
+  /* AGENDA DOMINGO */
+  .agenda-domingo { background: var(--morado-suave); border: 1px solid var(--morado); border-radius: 4px; padding: 24px 28px; margin-bottom: 24px; }
+  .ad-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--morado); margin-bottom: 12px; display: block; }
+  .agenda-domingo h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--morado); }
+  .ad-item { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+  .ad-num { background: var(--morado); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .ad-texto { font-size: 13px; color: #3d2060; line-height: 1.5; }
+  .ad-texto strong { font-weight: 600; }
+
+  /* CONDICIONES */
+  .condiciones-list { background: white; border: 1px solid var(--borde); border-radius: 4px; overflow: hidden; }
+  .cond-item { display: flex; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--borde); align-items: flex-start; }
+  .cond-item:last-child { border-bottom: none; }
+  .cond-num { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; color: var(--amarillo); background: var(--negro); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .cond-texto { font-size: 14px; color: #333; line-height: 1.6; }
+  .cond-texto strong { color: var(--negro); font-weight: 600; }
+
+  .nota-tabla { font-size: 12px; color: var(--gris); margin-top: 8px; font-style: italic; padding-left: 4px; }
+
+  footer { background: var(--negro); color: rgba(245,242,238,0.4); text-align: center; padding: 24px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  footer span { color: var(--amarillo); }
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <span class="tag-dao">DAO Consulting & Learning Hub · Uso Interno · v3 — Post reunión 18 mayo</span>
+  <h1>Propuesta Comercial<br><span>Interna</span></h1>
+  <p class="subtitulo">AS Capital — Actualizada con hallazgos del transcript del 18/05/2026</p>
+  <div class="portada-meta">
+    <div class="meta-item"><label>Cliente</label><span>AS Capital</span></div>
+    <div class="meta-item"><label>Versión</label><span>v3 — Mayo 2026</span></div>
+    <div class="meta-item"><label>Pendiente</label><span>Sesión con Emmanuel (domingo)</span></div>
+    <div class="meta-item"><label>Entrega cliente</label><span>Lunes siguiente</span></div>
+  </div>
+</div>
+
+<div class="contenido">
+
+  <!-- AVISOS -->
+  <div class="aviso interno">
+    <span style="font-size:18px;flex-shrink:0;">🔒</span>
+    <p><strong>Documento de uso interno exclusivo.</strong> No compartir con AS Capital. Versión actualizada con tres hallazgos del transcript del 18 de mayo: (1) portal de seguimiento post-venta, (2) filtro de prospectos por modelo de pago y (3) línea de capitalización como oportunidad futura.</p>
+  </div>
+
+  <div class="aviso pendiente">
+    <span style="font-size:18px;flex-shrink:0;">📅</span>
+    <p><strong>Pendiente antes de enviar al cliente — sesión con Emmanuel el domingo:</strong> validar precios finales P2 y P3, confirmar retainer mensual por nivel, decidir si el portal va con Softr + Airtable o desarrollo propio, y confirmar si n8n puede actualizar Airtable automáticamente.</p>
+  </div>
+
+  <div class="aviso nuevo">
+    <span style="font-size:18px;flex-shrink:0;">🆕</span>
+    <p><strong>Nuevo en v3:</strong> Portal de seguimiento post-venta agregado como Módulo Adicional con tres opciones tecnológicas. Filtro de contado especificado en P2. Línea de capitalización documentada como oportunidad futura. Agenda para sesión del domingo incluida al final.</p>
+  </div>
+
+  <!-- ESTRUCTURA DE COSTOS -->
+  <div class="seccion">
+    <div class="seccion-header">
+      <span class="seccion-num">01</span>
+      <h2>Estructura de inversión</h2>
+    </div>
+    <div class="mapa-costos">
+      <div class="mc-card honorario">
+        <span class="mc-icon">🛠️</span>
+        <span class="mc-tipo">Honorarios</span>
+        <span class="mc-quien">DAO + Emmanuel · facturas separadas</span>
+        <span class="mc-cuando">Pago único por paquete</span>
+      </div>
+      <div class="mc-card plataforma">
+        <span class="mc-icon">💻</span>
+        <span class="mc-tipo">Plataformas</span>
+        <span class="mc-quien">Cliente → Wix, Notion, Softr/Airtable</span>
+        <span class="mc-cuando">Mensual / permanente</span>
+      </div>
+      <div class="mc-card retainer">
+        <span class="mc-icon">⚙️</span>
+        <span class="mc-tipo">Retainer Técnico</span>
+        <span class="mc-quien">Cliente → Emmanuel</span>
+        <span class="mc-cuando">Mensual / desde Paquete 2</span>
+      </div>
+      <div class="mc-card ads">
+        <span class="mc-icon">📣</span>
+        <span class="mc-tipo">Meta Ads</span>
+        <span class="mc-quien">Cliente → Meta directamente</span>
+        <span class="mc-cuando">Mensual / variable</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAQUETES -->
+  <div class="seccion">
+    <div class="seccion-header">
+      <span class="seccion-num">02</span>
+      <h2>Paquetes de implementación</h2>
+    </div>
+
+    <!-- P1 -->
+    <div class="paquete p1">
+      <div class="paquete-header">
+        <div>
+          <span class="ph-etiqueta">Paquete 1 — Entrada recomendada</span>
+          <div class="ph-nombre">Fundacional</div>
+          <div class="ph-tagline">"AS Capital existe digitalmente y puede captar sus primeros prospectos"</div>
+        </div>
+        <div class="ph-duracion"><span class="dur-val">8</span><span class="dur-label">semanas</span></div>
+      </div>
+      <div class="paquete-entregables">
+        <div class="ent-col dao">
+          <h4>DAO Consulting</h4>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Identidad visual completa</strong><small>Logo, paleta, tipografía, manual, plantillas</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Landing page en Wix</strong><small>Vía colaborador web. Hosting/dominio: cliente paga directo</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Sistema documental en Notion</strong><small>Nomenclatura, roles, 16 campos por expediente. Licencia: cliente paga directo</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>CRM base + protocolo de seguimiento</strong><small>Base de prospectos, responsables, guión por perfil</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Plan de contenido 30 días</strong><small>12 publicaciones Facebook e Instagram</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Capacitación del equipo</strong><small>Sesión 2 horas para adopción del sistema</small></div></div>
+        </div>
+        <div class="ent-col emmanuel">
+          <h4>Emmanuel</h4>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Mapeo técnico de procesos internos</strong><small>Flujos WhatsApp y Drive para diseño de automatizaciones</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>WhatsApp Business configurado</strong><small>Mensajes de bienvenida y respuestas rápidas por perfil</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Bot estático para redes y WhatsApp</strong><small>Respuestas predefinidas. Sin IA conversacional</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Setup de campañas Meta Ads</strong><small>Segmentación inicial. Presupuesto: cliente directo a Meta</small></div></div>
+        </div>
+      </div>
+      <div class="paquete-costos">
+        <div class="costos-grid">
+          <div class="costo-bloque"><span class="cb-tipo">Honorarios DAO</span><span class="cb-quien">Factura DAO</span><span class="cb-monto">$43,000</span><span class="cb-sub">MXN · pago único</span></div>
+          <div class="costo-bloque"><span class="cb-tipo">Honorarios Emmanuel</span><span class="cb-quien">Factura Emmanuel</span><span class="cb-monto">$30,000</span><span class="cb-sub">MXN · rango $23K–$37K</span></div>
+          <div class="costo-bloque"><span class="cb-tipo">Retainer técnico</span><span class="cb-quien">No aplica en P1</span><span class="cb-monto" style="font-size:18px;color:var(--gris);">N/A</span><span class="cb-sub">Bot estático, sin infraestructura cloud</span></div>
+        </div>
+        <div class="costo-total"><span class="ct-label">Total honorarios — Paquete 1</span><span class="ct-monto">$73,000 MXN</span></div>
+      </div>
+      <div class="costos-mensuales">
+        <span class="cm-titulo">Costos mensuales del cliente — post implementación</span>
+        <div class="cm-grid">
+          <div class="cm-item"><div class="cm-dot azul"></div><div class="cm-texto"><strong>Wix + dominio</strong><span>~$450–500 MXN/mes</span></div></div>
+          <div class="cm-item"><div class="cm-dot azul"></div><div class="cm-texto"><strong>Notion (2–3 usuarios)</strong><span>~$300–480 MXN/mes</span></div></div>
+          <div class="cm-item"><div class="cm-dot rojo"></div><div class="cm-texto"><strong>Meta Ads</strong><span>Variable · mínimo recomendado $3,000/mes</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="paquete p2">
+      <div class="paquete-header">
+        <div>
+          <span class="ph-etiqueta">Paquete 2 — Incluye todo P1</span>
+          <div class="ph-nombre">Captación Inteligente</div>
+          <div class="ph-tagline">"Respuesta 24/7 y filtro automático de prospectos no calificados"</div>
+        </div>
+        <div class="ph-duracion"><span class="dur-val">14</span><span class="dur-label">semanas</span></div>
+      </div>
+      <div class="incluye-banner">✓ Todo el Paquete 1 incluido — lo siguiente es adicional</div>
+      <div class="paquete-entregables">
+        <div class="ent-col dao">
+          <h4>DAO Consulting — Adicional P2</h4>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Estrategia de campañas por perfil</strong><small>Comprador / inversionista / acreditado</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Campaña digital para acreditados</strong><small>Mensaje empático para deudores — prioridad validada en reunión 18/05</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Dashboard básico de métricas</strong><small>Prospectos, fuente, tiempo de respuesta, citas, cierres</small></div></div>
+        </div>
+        <div class="ent-col emmanuel">
+          <h4>Emmanuel — Adicional P2</h4>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Agente Omnicanal</strong><small>Conversación fluida 24/7 en Facebook, Instagram y WhatsApp</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div>
+            <div class="ei-texto">
+              <strong>Agente Clasificador + Filtro de contado <span class="ei-nuevo">actualizado</span></strong>
+              <small>Detecta perfil del prospecto. Filtro específico: descarta automáticamente a quien pregunte por crédito hipotecario — operación exclusivamente de contado. Validado por Sandra en reunión 18/05</small>
+            </div>
+          </div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Infraestructura Hetzner + tokens IA</strong><small>Costo mensual cubierto en retainer de Emmanuel</small></div></div>
+        </div>
+      </div>
+      <div class="paquete-costos">
+        <div class="costos-grid">
+          <div class="costo-bloque"><span class="cb-tipo">Honorarios adicionales DAO</span><span class="cb-quien">Factura DAO</span><span class="cb-monto">$7,000</span><span class="cb-sub">MXN · pago único</span></div>
+          <div class="costo-bloque"><span class="cb-tipo">Honorarios adicionales Emmanuel</span><span class="cb-quien">Factura Emmanuel</span><span class="cb-monto">$39,000</span><span class="cb-sub">MXN · rango $23K–$58K</span></div>
+          <div class="costo-bloque"><span class="cb-tipo">Retainer técnico mensual</span><span class="cb-quien">Cliente → Emmanuel</span><span class="cb-monto">$4,500</span><span class="cb-sub">MXN/mes · servidor + tokens IA</span></div>
+        </div>
+        <div class="costo-total"><span class="ct-label">Total honorarios acumulados — P1 + P2</span><span class="ct-monto">$119,000 MXN</span></div>
+      </div>
+      <div class="costos-mensuales">
+        <span class="cm-titulo">Costos mensuales del cliente — Paquete 2 activo</span>
+        <div class="cm-grid">
+          <div class="cm-item"><div class="cm-dot azul"></div><div class="cm-texto"><strong>Wix + Notion</strong><span>~$750–980 MXN/mes</span></div></div>
+          <div class="cm-item"><div class="cm-dot morado"></div><div class="cm-texto"><strong>Retainer Emmanuel</strong><span>$4,500 MXN/mes</span></div></div>
+          <div class="cm-item"><div class="cm-dot rojo"></div><div class="cm-texto"><strong>Meta Ads</strong><span>Variable · mínimo $5,000/mes</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="paquete p3">
+      <div class="paquete-header">
+        <div>
+          <span class="ph-etiqueta">Paquete 3 — Incluye P1 y P2</span>
+          <div class="ph-nombre">Ecosistema Completo</div>
+          <div class="ph-tagline">"Operación interna autónoma: agendas, consultas legales y expedientes desde el celular"</div>
+        </div>
+        <div class="ph-duracion"><span class="dur-val">22</span><span class="dur-label">semanas</span></div>
+      </div>
+      <div class="incluye-banner">✓ Todo P1 y P2 incluido — lo siguiente es adicional</div>
+      <div class="paquete-entregables">
+        <div class="ent-col dao">
+          <h4>DAO Consulting — Adicional P3</h4>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Gestión de base de conocimiento legal</strong><small>Recopilación y estructuración de documentos para Legal RAG</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Coordinación de implementación avanzada</strong><small>Gestión de tiempos, pruebas y entrega formal del ecosistema</small></div></div>
+        </div>
+        <div class="ent-col emmanuel">
+          <h4>Emmanuel — Adicional P3</h4>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Smart Scheduler</strong><small>Agenda citas y optimiza rutas de visitas a inmuebles</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Legal RAG</strong><small>Base vectorial privada con normativa notarial y contratos de AS Capital</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Agente de búsqueda documental vía WhatsApp</strong><small>Consulta de expediente desde celular en segundos</small></div></div>
+          <div class="ent-item"><div class="ei-dot"></div><div class="ei-texto"><strong>Infraestructura avanzada AWS/GCP</strong><small>Para privacidad del RAG. Cubierto en retainer actualizado</small></div></div>
+        </div>
+      </div>
+      <div class="paquete-costos">
+        <div class="costos-grid">
+          <div class="costo-bloque"><span class="cb-tipo">Honorarios adicionales DAO</span><span class="cb-quien">Factura DAO</span><span class="cb-monto">$4,000</span><span class="cb-sub">MXN · pago único</span></div>
+          <div class="costo-bloque"><span class="cb-tipo">Honorarios adicionales Emmanuel</span><span class="cb-quien">Factura Emmanuel</span><span class="cb-monto">$45,000</span><span class="cb-sub">MXN · rango $34K–$56K</span></div>
+          <div class="costo-bloque"><span class="cb-tipo">Retainer técnico mensual</span><span class="cb-quien">Cliente → Emmanuel</span><span class="cb-monto">$8,500</span><span class="cb-sub">MXN/mes · infraestructura avanzada + RAG</span></div>
+        </div>
+        <div class="costo-total"><span class="ct-label">Total honorarios acumulados — P1 + P2 + P3</span><span class="ct-monto">$168,000 MXN</span></div>
+      </div>
+      <div class="costos-mensuales">
+        <span class="cm-titulo">Costos mensuales del cliente — Paquete 3 activo</span>
+        <div class="cm-grid">
+          <div class="cm-item"><div class="cm-dot azul"></div><div class="cm-texto"><strong>Wix + Notion</strong><span>~$750–980 MXN/mes</span></div></div>
+          <div class="cm-item"><div class="cm-dot morado"></div><div class="cm-texto"><strong>Retainer Emmanuel</strong><span>$8,500 MXN/mes</span></div></div>
+          <div class="cm-item"><div class="cm-dot rojo"></div><div class="cm-texto"><strong>Meta Ads</strong><span>Variable · mínimo $5,000/mes</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MÓDULO ADICIONAL: PORTAL -->
+    <div class="modulo-portal">
+      <div class="mp-header">
+        <div>
+          <span class="ph-etiqueta" style="opacity:0.8;">Módulo Adicional — Identificado en reunión 18/05/2026</span>
+          <div class="ph-nombre" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:4px;">Portal de Seguimiento Post-Venta</div>
+          <div class="ph-tagline" style="font-size:14px;opacity:0.85;font-style:italic;">"El cliente entra con usuario y contraseña y ve en tiempo real el estatus de su caso"</div>
+        </div>
+        <div class="mp-badge">Cotización pendiente — definir domingo</div>
+      </div>
+
+      <div class="mp-cuerpo">
+        <div class="mp-col">
+          <h4>Lo que Sandra describió</h4>
+          <div class="ent-item"><div class="ei-dot" style="background:var(--naranja);"></div><div class="ei-texto"><strong>Acceso con usuario y contraseña</strong><small>Un acceso único por cliente, personalizado</small></div></div>
+          <div class="ent-item"><div class="ei-dot" style="background:var(--naranja);"></div><div class="ei-texto"><strong>Línea de tiempo del caso</strong><small>Pagos de agua, predial, CFE, cesión de derechos, acuerdos de juzgado, remisión de expediente — con fechas</small></div></div>
+          <div class="ent-item"><div class="ei-dot" style="background:var(--naranja);"></div><div class="ei-texto"><strong>Acceso a documentos relevantes</strong><small>Constancias, certificados y acuses disponibles en la plataforma</small></div></div>
+          <div class="ent-item"><div class="ei-dot" style="background:var(--naranja);"></div><div class="ei-texto"><strong>Botón "Quiero vender"</strong><small>El cliente envía alerta al equipo de AS Capital desde la plataforma con precio propuesto</small></div></div>
+          <div class="ent-item"><div class="ei-dot" style="background:var(--naranja);"></div><div class="ei-texto"><strong>Reducción de llamadas repetitivas</strong><small>El cliente se informa solo — AS Capital deja de responder "no hay avance" a diario</small></div></div>
+        </div>
+        <div class="mp-col">
+          <h4>Opciones tecnológicas</h4>
+          <div class="tech-opciones" style="grid-template-columns:1fr;">
+            <div class="tech-card tc-recomendada">
+              <span class="tc-tag">⭐ Recomendada — validar con Emmanuel el domingo</span>
+              <span class="tc-nombre">Softr + Airtable</span>
+              <span class="tc-desc">Portal de cliente sin código pesado. Airtable como base de datos centralizada (misma que el sistema documental Fase 2). Softr genera el portal visual con login. n8n puede actualizar Airtable automáticamente desde los flujos internos — cliente ve cambios sin intervención manual del equipo.</span>
+              <span class="tc-costo">Setup: ~3–4 semanas · Operativo: ~$1,300 MXN/mes (Airtable + Softr)</span>
+            </div>
+            <div class="tech-card">
+              <span class="tc-tag">Alternativa B</span>
+              <span class="tc-nombre">Bubble</span>
+              <span class="tc-desc">App web completa con lógica avanzada. Más potente pero mayor tiempo y costo de desarrollo.</span>
+              <span class="tc-costo">Setup: ~6–10 semanas · Operativo: ~$1,800 MXN/mes</span>
+            </div>
+            <div class="tech-card">
+              <span class="tc-tag">Alternativa C</span>
+              <span class="tc-nombre">Desarrollo propio Emmanuel</span>
+              <span class="tc-desc">Máxima integración con agentes IA. Cubierto dentro del retainer del P3. Mayor tiempo de desarrollo.</span>
+              <span class="tc-costo">Setup: ~8–14 semanas · Dentro del retainer existente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#faf8f5;padding:18px 36px;border-top:1px solid var(--borde);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;color:var(--gris);">Precio de implementación del portal: <strong style="color:var(--negro);">pendiente de definir con Emmanuel el domingo</strong></span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;background:var(--naranja);color:white;padding:4px 12px;border-radius:20px;">A cotizar por separado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO -->
+  <div class="seccion">
+    <div class="seccion-header">
+      <span class="seccion-num">03</span>
+      <h2>Comparativo de paquetes</h2>
+    </div>
+    <table class="tabla-comp">
+      <thead>
+        <tr>
+          <th>Capacidad</th>
+          <th class="th-p1">Fundacional</th>
+          <th class="th-p2">Intermedio</th>
+          <th class="th-p3">Avanzado</th>
+          <th class="th-p4">Portal (+)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Identidad visual y marca</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Landing page (Wix)</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Sistema documental + CRM (Notion)</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Campañas Meta Ads activas</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Agente IA conversacional 24/7</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Filtro automático de prospectos sin contado</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Campaña para acreditados/deudores</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Dashboard de métricas</td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Smart Scheduler + Legal RAG</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Búsqueda documental vía WhatsApp</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Portal post-venta (usuario + contraseña)</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Línea de tiempo del caso visible al cliente</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Alerta "Quiero vender" desde el portal</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td></tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Honorarios de implementación</td>
+          <td class="tf-p1">$73,000</td>
+          <td class="tf-p2">$119,000</td>
+          <td class="tf-p3">$168,000</td>
+          <td class="tf-p4">Por definir</td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="nota-tabla">* MXN + IVA. Plataformas, retainer y Meta Ads son costos directos del cliente, no incluidos en honorarios.</p>
+  </div>
+
+  <!-- OPORTUNIDAD FUTURA -->
+  <div class="seccion">
+    <div class="seccion-header">
+      <span class="seccion-num">04</span>
+      <h2>Oportunidad futura identificada</h2>
+    </div>
+    <div class="oportunidad-futura">
+      <span class="of-tag">🚀 Registrado en reunión 18/05/2026 — No cotizar aún</span>
+      <h3>Línea de Capitalización — Pool de Inversión</h3>
+      <p>AS Capital mencionó que quieren un producto donde personas con capital disponible (desde ~$50,000–$100,000 MXN) puedan invertir en un fondo colectivo para adquirir créditos vencidos y recibir rendimientos sin comprar un inmueble completo. Esto es un nuevo producto financiero que requiere su propio funnel de captación, estructura legal y posiblemente regulación. No forma parte de ninguno de los paquetes actuales. Documentarlo aquí para no perderlo — proponer en una segunda reunión post-cierre como Fase 6 o producto independiente.</p>
+    </div>
+  </div>
+
+  <!-- AGENDA DOMINGO -->
+  <div class="seccion">
+    <div class="seccion-header">
+      <span class="seccion-num">05</span>
+      <h2>Agenda para sesión del domingo con Emmanuel</h2>
+    </div>
+    <div class="agenda-domingo">
+      <span class="ad-tag">📅 Sesión previa al envío de propuesta — domingo</span>
+      <h3>5 puntos a resolver antes de enviar al cliente el lunes</h3>
+      <div class="ad-item"><div class="ad-num">1</div><div class="ad-texto"><strong>Precios finales P2 y P3:</strong> validar los $39,000 y $45,000 de honorarios de Emmanuel. ¿Son los números que va a presentar o hay ajuste?</div></div>
+      <div class="ad-item"><div class="ad-num">2</div><div class="ad-texto"><strong>Retainer mensual exacto por nivel:</strong> confirmar si $4,500 (P2) y $8,500 (P3) cubren sus costos de infraestructura más margen razonable.</div></div>
+      <div class="ad-item"><div class="ad-num">3</div><div class="ad-texto"><strong>Portal de cliente — decisión tecnológica:</strong> ¿Softr + Airtable o desarrollo propio? ¿Puede n8n actualizar Airtable automáticamente desde los flujos internos para que el equipo de AS Capital no tenga que actualizar manualmente?</div></div>
+      <div class="ad-item"><div class="ad-num">4</div><div class="ad-texto"><strong>Precio del portal:</strong> una vez decidida la tecnología, necesitamos un rango de honorarios de Emmanuel para el setup. Solo un rango — la propuesta al cliente lo presenta como "cotización en desarrollo".</div></div>
+      <div class="ad-item"><div class="ad-num">5</div><div class="ad-texto"><strong>Facturación:</strong> confirmar si el cliente recibe facturas separadas de DAO y Emmanuel, o si DAO emite una sola factura y liquida internamente a Emmanuel.</div></div>
+    </div>
+  </div>
+
+  <!-- CONDICIONES -->
+  <div class="seccion">
+    <div class="seccion-header">
+      <span class="seccion-num">06</span>
+      <h2>Condiciones generales</h2>
+    </div>
+    <div class="condiciones-list">
+      <div class="cond-item"><div class="cond-num">1</div><div class="cond-texto"><strong>NDA obligatorio antes del inicio.</strong> Requisito previo a Fase 0.</div></div>
+      <div class="cond-item"><div class="cond-num">2</div><div class="cond-texto"><strong>Estructura de pagos:</strong> 50% al firmar + 50% al inicio de la etapa de desarrollo de cada paquete.</div></div>
+      <div class="cond-item"><div class="cond-num">3</div><div class="cond-texto"><strong>Aprobaciones en 5 días hábiles.</strong> Retrasos del cliente impactan el calendario proporcionalmente.</div></div>
+      <div class="cond-item"><div class="cond-num">4</div><div class="cond-texto"><strong>2 rondas de revisión por entregable.</strong> Cambios fuera de alcance se cotizan aparte.</div></div>
+      <div class="cond-item"><div class="cond-num">5</div><div class="cond-texto"><strong>Propiedad intelectual:</strong> al completar el pago de cada paquete, todos los entregables son propiedad de AS Capital.</div></div>
+      <div class="cond-item"><div class="cond-num">6</div><div class="cond-texto"><strong>Vigencia de la propuesta:</strong> 30 días naturales desde la entrega al cliente.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>DAO Consulting & Learning Hub</span> · Documento interno v3 · No compartir con el cliente · Mayo 2026
+</footer>
+
+</body>
+</html>
